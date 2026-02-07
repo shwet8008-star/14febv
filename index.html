@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sachiv Ji 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+height:100vh;
+background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:#3b2c3f
+}
+
+.hearts span{
+position:absolute;
+font-size:20px;
+animation:float 6s linear infinite;
+opacity:.7
+}
+
+@keyframes float{
+0%{transform:translateY(110vh) scale(.8);opacity:0}
+40%{opacity:1}
+100%{transform:translateY(-10vh) scale(1.2);opacity:0}
+}
+
+.card{
+background:rgba(255,255,255,.35);
+backdrop-filter:blur(14px);
+padding:45px 35px;
+border-radius:28px;
+box-shadow:0 25px 60px rgba(0,0,0,.2);
+max-width:450px;
+width:92%;
+text-align:center;
+animation:fadeIn 1.3s ease
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px) scale(.95)}
+to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:2.2rem;
+margin-bottom:15px;
+color:#5a2a82
+}
+
+.subtitle{
+font-size:1.05rem;
+margin-bottom:28px
+}
+
+.buttons{
+position:relative;
+height:130px
+}
+
+#yes{
+padding:16px 48px;
+font-size:1.35rem;
+border:none;
+border-radius:60px;
+background:linear-gradient(135deg,#ff5fa2,#9b5de5);
+color:white;
+cursor:pointer;
+box-shadow:0 15px 35px rgba(155,93,229,.5);
+transition:.25s
+}
+
+#yes:hover{transform:scale(1.1)}
+
+#no{
+position:absolute;
+top:0;
+right:0;
+padding:8px 20px;
+font-size:.8rem;
+border:none;
+border-radius:20px;
+background:#e0e0e0;
+color:#333;
+cursor:pointer
+}
+
+.hidden{display:none}
+
+.quote{
+font-family:'Playfair Display',serif;
+font-size:1.4rem;
+line-height:1.55;
+color:#4a235a
+}
+
+.meme{
+margin-top:18px;
+font-size:.95rem;
+opacity:.9
+}
+
+.signature{
+margin-top:8px;
+font-family:'Playfair Display',serif;
+font-size:1.25rem;
+font-style:italic
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="card" id="ask">
+<h1>Sachiv Ji 🌷</h1>
+<p class="subtitle">
+I don’t know when it happened,<br>
+but talking to you slowly became my favorite part of the day.
+</p>
+
+<h1 style="font-size:1.9rem;margin-top:10px;">Will you be my Valentine?</h1>
+
+<div class="buttons">
+<button id="yes">Yes 😊</button>
+<button id="no">No</button>
+</div>
+</div>
+
+<div class="card hidden" id="answer">
+<h1>That made me smile 🌸</h1>
+<p class="quote">
+“Some people feel like comfort.<br>
+Some feel like home.<br>
+And some… quietly become special.”
+</p>
+
+<p class="meme">
+Ye kya bakk rha hu 🤣<br>
+But jo bhi hai, sab sach hai 🌷💜
+</p>
+
+<div class="signature">
+— Shwet
+</div>
+</div>
+
+<!-- Background Music -->
+<audio id="bgm" preload="auto">
+<!-- 
+IMPORTANT:
+Due to browser & copyright restrictions, autoplay works BEST if you download
+"I Like Me Better - Lauv" as an MP3 and name it EXACTLY:
+
+ilikemebetter.mp3
+
+Then place it in the SAME FOLDER as this HTML file.
+
+If you do that, the music will play perfectly after clicking YES ❤️
+-->
+<source src="ilikemebetter.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const ask=document.getElementById("ask");
+const answer=document.getElementById("answer");
+const bgm=document.getElementById("bgm");
+
+function dodge(){
+const x=Math.random()*220-110;
+const y=Math.random()*220-110;
+noBtn.style.transform=`translate(${x}px,${y}px)`;
+}
+
+noBtn.addEventListener("mouseover",dodge);
+noBtn.addEventListener("touchstart",e=>{
+e.preventDefault();
+dodge();
+});
+
+yesBtn.addEventListener("click",()=>{
+ask.classList.add("hidden");
+answer.classList.remove("hidden");
+spawnHearts();
+
+try{
+bgm.volume=0.7;
+bgm.play();
+}catch(e){
+console.log("Music autoplay blocked until file is added.");
+}
+});
+
+function spawnHearts(){
+const container=document.querySelector(".hearts");
+setInterval(()=>{
+const h=document.createElement("span");
+h.innerHTML=Math.random()>.5?"💜":"🌸";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=Math.random()*3+3+"s";
+container.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+}
+</script>
+
+</body>
+</html>
